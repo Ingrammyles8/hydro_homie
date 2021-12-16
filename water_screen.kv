@@ -1,0 +1,67 @@
+<WaterScreen@Screen>
+    name: "water_screen"
+    Label:
+        id: conn
+        text: "No Bottle Connected"
+        color: 1, 1, 1, 1
+    GridLayout:
+        cols: 2
+        size_hint: 1, None
+        height: 50 *5
+        GridLayout:
+            cols: 2
+
+            Button:
+                text: "Hydration Level"
+                on_press:
+                    root.get_hydration()
+            Label:
+                id: hyd
+                text: "Calibrate"
+            Button:
+                text: "Turbidity"
+                on_press:
+                    root.get_tbd()
+            GridLayout:
+                cols: 2
+                Label:
+                    text: "Bottle"
+                Label:
+                    text: "Source"
+                Label:
+                    id: bottle_tbd
+                    text: ""
+                Label:
+                    id: tbd
+                    text: ""
+            Button
+                text: "Bottle Water pH"
+                on_press:
+                    root.get_ph()
+            Label:
+                id: pH
+                text: ""
+            Button
+                text: "Water Source Chl"
+                on_press:
+                    root.get_chl()
+            Label:
+                id: chl
+                text: ""
+        GridLayout:
+            rows: 3
+
+            Button:
+                text: "Map"
+                on_press:
+                    app.root.current = "map_screen"
+                    root.manager.transition.direction = "left"
+            Button
+                id: bottle_conn
+                text: "Connect Bottle"
+                on_press:
+                    root.connect_bottle()
+            Button:
+                text: "Voice Command"
+                on_press:
+                    root.record()

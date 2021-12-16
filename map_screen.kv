@@ -1,0 +1,63 @@
+#:import MapView kivy_garden.mapview.MapView
+
+<MapScreen@Screen>:
+    name: "map_screen"
+    MapView:
+        id: mapview
+        lat: root.cur_lat
+        lon: root.cur_lon
+        zoom: 10
+
+
+        MapMarkerPopup:
+            id: marker_1
+            lat: root.cur_lat
+            lon: root.cur_lon
+            source: "map_marker.png"
+            Button:
+                on_release:
+                    print("Hi")
+
+
+
+    BoxLayout:
+        size_hint: 1, None
+        height: 50
+        Button:
+            text: "Water Bottle"
+            on_press:
+                app.root.current = "water_screen"
+                root.manager.transition.direction = "right"
+        Button:
+            text: "Zoom Out"
+            on_press:
+                mapview.zoom = mapview.zoom - 1
+        Button:
+            text: "Nearest Ftns"
+            on_press:
+                root.get_water_ftns()
+        #Button:
+            #text: "Clear"
+            #on_press:
+                #root.clear_water_ftns()
+
+
+# <Test>:
+#     size_hint: .5, .5
+#     pos_hint: {'center_x': .5, 'center_y': .5}
+#     do_default_tab: False
+#
+#     TabbedPanelItem:
+#         text: 'Water Bottle'
+#         Label:
+#             text: 'This is water'
+#     TabbedPanelItem:
+#         text: 'tab2'
+
+
+    # TabbedPanelItem:
+    #     text: 'tab3'
+    #     RstDocument:
+    #         text:
+    #             '\\n'.join(("Hello world", "-----------",
+    #             "You are in the third tab."))
