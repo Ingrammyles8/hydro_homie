@@ -264,39 +264,39 @@ class WaterScreen(Screen):
     def get_ph(self):
         # get pH level of bottle water
         self.ids.conn.color = (1,1,1,1)
-        self.ids.pH.text = "7.4"
-        self.ids.conn.text = "Your water has a pH of 7.4"
-# =============================================================================
-#         if conn != True:
-#             self.ids.conn.text = "Please Connect Bottle"
-#         else:
-#             self.ids.pH.text = "Calibrating"
-#             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-#             server_address = (ip, 80)
-#             sock.connect(server_address)
-#             
-#             
-#             try:
-#             
-#                 # Send data
-#                 message = "ph" + '\n'
-#                         
-#                 sock.send(message.encode())
-#                         #if "tweet" in old_value:
-#                         #    status = "Status update: {0}".format(value.replace("tweet ", ""))
-#                         #    tweet = requests.post("https://api.thingspeak.com/apps/thingtweet/1/statuses/update?apikey=ZV57S1TFIHVN1VKC&status={0}".format(
-#                         #                            status))
-#         
-#                 response = sock.recv(2048)
-#                 print(response.decode())
-#                 self.ids.pH.text = str(response.decode())
-#                 ph = str(response.decode())
-#                 self.ids.conn.text = "Your water has a pH of " + ph + ". Don't drink that!"
-#         
-#             except:
-#                 self.ids.pH.text = "error"
-#                 print("error")
-# =============================================================================
+
+        if conn != True:
+            self.ids.conn.text = "Please Connect Bottle"
+        else:
+            self.ids.pH.text = "Calibrating"
+            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            server_address = (ip, 80)
+            sock.connect(server_address)
+            
+            
+            try:
+            
+                # Send data
+                message = "ph" + '\n'
+                        
+                sock.send(message.encode())
+                        #if "tweet" in old_value:
+                        #    status = "Status update: {0}".format(value.replace("tweet ", ""))
+                        #    tweet = requests.post("https://api.thingspeak.com/apps/thingtweet/1/statuses/update?apikey=ZV57S1TFIHVN1VKC&status={0}".format(
+                        #                            status))
+        
+                response = sock.recv(2048)
+                print(response.decode())
+                self.ids.pH.text = str(response.decode())
+                ph = str(response.decode())
+                if float(ph) < 3:
+                    self.ids.conn.text = "Your water has a pH of " + ph + ". Don't drink that!"
+                else:
+                     self.ids.conn.text = "Your water has a pH of " + ph
+        
+            except:
+                self.ids.pH.text = "error"
+                print("error")
                 
     
     def get_chl(self):
