@@ -48,8 +48,8 @@ response = requests.get("http://ip-api.com/json/")
 #print(response.json())
 city = response.json()["city"]
 state = response.json()["region"]
-lat = 40.8093393#response.json()["lat"]
-lon = -73.9602268#response.json()["lon"]
+lat = response.json()["lat"]
+lon = response.json()["lon"]
 coordinates = (lat, lon)
 
 
@@ -572,7 +572,7 @@ Builder.load_file("main.kv")
 
 
 
-class Hydro(App):
+class Hydro_Homie(App):
 
     def build(self):
         # Calibrate the Microphone to Silent Levels
@@ -680,4 +680,4 @@ class Hydro(App):
 
 if __name__ == '__main__':
 
-     Hydro().run()
+     Hydro_Homie().run()
